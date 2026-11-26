@@ -2,7 +2,7 @@ aje-cli
 
 version: 0.1.alpha 
 
-author: <https://aijungeum.com> <aijungeum@gmail.com> 
+author: <https://aijungeum.com> &emsp;  <aijungeum@gmail.com> 
 
 license: MIT 
 
