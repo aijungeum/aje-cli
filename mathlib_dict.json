@@ -1,0 +1,912 @@
+[
+  {
+    "order": 1,
+    "token": "0xE001",
+    "lean_pattern": "theorem ",
+    "lean_emit": "theorem aje_generated_theorem ",
+    "ko_desc": "[정리 선언] 새로운 수학적 본정리의 증명을 개시합니다."
+  },
+  {
+    "order": 2,
+    "token": "0xE002",
+    "lean_pattern": "lemma ",
+    "lean_emit": "lemma aje_generated_lemma ",
+    "ko_desc": "[보조정리 선언] 본정리를 뒷받침할 핵심 보조정리를 설정합니다."
+  },
+  {
+    "order": 3,
+    "token": "0x0101",
+    "lean_pattern": "(s : ℂ)",
+    "lean_emit": "(s : ℂ) ",
+    "ko_desc": "[변수 정의] 복소평면 위의 임의의 복소수 변수 `s` ∈ ℂ 를 도입합니다."
+  },
+  {
+    "order": 4,
+    "token": "0x0102",
+    "lean_pattern": "(z : ℂ)",
+    "lean_emit": "(z : ℂ) ",
+    "ko_desc": "[변수 정의] 적분 경로 및 복소 함수 해석을 위한 복소 변수 `z` ∈ ℂ 를 도입합니다."
+  },
+  {
+    "order": 5,
+    "token": "0x0103",
+    "lean_pattern": "(p : ℕ)",
+    "lean_emit": "(p : ℕ) [Fact (Nat.Prime p)] ",
+    "ko_desc": "[소수 도메인] 오일러 곱 전개를 위한 소수(Prime) 변수 `p`를 설정합니다."
+  },
+  {
+    "order": 6,
+    "token": "0x0104",
+    "lean_pattern": "(x : ℝ)",
+    "lean_emit": "(x : ℝ) (hx : 1 < x) ",
+    "ko_desc": "[실수 경계] 점근적 크기 평가를 위한 1보다 큰 실수 변수 `x`를 도입합니다."
+  },
+  {
+    "order": 7,
+    "token": "0x8201",
+    "lean_pattern": "0 < s.re ∧ s.re < 1",
+    "lean_emit": "(h_strip : 0 < s.re ∧ s.re < 1) ",
+    "ko_desc": "[임계띠 조건] 복소수 `s`의 실수부가 0과 1 사이(0 < Re(s) < 1)인 임계띠 내부에 놓임을 전제합니다."
+  },
+  {
+    "order": 8,
+    "token": "0x8202",
+    "lean_pattern": "1 < s.re",
+    "lean_emit": "(h_re_gt_one : 1 < s.re) ",
+    "ko_desc": "[절대 수렴 반평면] 실수부 Re(s) > 1 영역을 설정하여 디리클레 급수와 오일러 곱의 절대 수렴을 보장합니다."
+  },
+  {
+    "order": 9,
+    "token": "0x8203",
+    "lean_pattern": "s.re = 1 / 2",
+    "lean_emit": "(h_crit_line : s.re = 1 / 2) ",
+    "ko_desc": "[임계선 조건] 리만 가설의 핵심 직선인 Re(s) = 1/2 위에 영점이 위치함을 명시합니다."
+  },
+  {
+    "order": 10,
+    "token": "0x8204",
+    "lean_pattern": "s ≠ 1",
+    "lean_emit": "(hs_ne_one : s ≠ 1) ",
+    "ko_desc": "[단순극 회피] 리만 제타 함수가 발산하는 유일한 극점인 `s = 1`을 제외합니다."
+  },
+  {
+    "order": 11,
+    "token": "0x8105",
+    "lean_pattern": "riemannZeta s = 0",
+    "lean_emit": "(h_zero : riemannZeta s = 0) ",
+    "ko_desc": "[제타 영점 가정] 복소수 `s`에서 리만 제타 함수의 함숫값이 0이 된다고 가정합니다 (ζ(s) = 0)."
+  },
+  {
+    "order": 12,
+    "token": "0x8101",
+    "lean_pattern": "riemannZeta_functional_equation",
+    "lean_emit": "  have h_fe := riemannZeta_functional_equation s\n",
+    "ko_desc": "[함수 방정식] 리만 제타 함수의 대칭성(s ↔ 1 - s)을 연결하는 핵심 함수 방정식을 호출합니다."
+  },
+  {
+    "order": 13,
+    "token": "0x8102",
+    "lean_pattern": "riemannZeta_eulerProduct",
+    "lean_emit": "  have h_euler := riemannZeta_eulerProduct h_re_gt_one\n",
+    "ko_desc": "[오일러 곱 항등식] 자연수 합으로 정의된 제타 함수를 모든 소수에 대한 무한곱 Π(1 - p^(-s))^(-1) 으로 변환합니다."
+  },
+  {
+    "order": 14,
+    "token": "0x8103",
+    "lean_pattern": "riemannZeta_ne_zero_of_one_lt_re",
+    "lean_emit": "  exact riemannZeta_ne_zero_of_one_lt_re h_re_gt_one\n",
+    "ko_desc": "[반평면 비영 정리] Re(s) > 1 영역에서는 수렴하는 오일러 곱의 각 인자가 0이 아니므로 ζ(s) ≠ 0 임을 도출합니다."
+  },
+  {
+    "order": 15,
+    "token": "0x8104",
+    "lean_pattern": "riemannZeta_ne_zero_of_one_le_re",
+    "lean_emit": "  exact riemannZeta_ne_zero_of_one_le_re (by linarith)\n",
+    "ko_desc": "[경계선 비영 정리] 아다마르-발레푸생 정리에 의해 경계선 Re(s) = 1 위에도 제타 함수의 영점이 존재하지 않음을 적용합니다."
+  },
+  {
+    "order": 16,
+    "token": "0x8106",
+    "lean_pattern": "riemannZeta_neg_two_mul_nat_add_one",
+    "lean_emit": "  rw [riemannZeta_neg_two_mul_nat_add_one]\n",
+    "ko_desc": "[자명한 영점 정리] 음의 짝수(-2, -4, -6, ...)에서 사인 인자가 0이 되어 발생하는 자명한 영점을 소거합니다."
+  },
+  {
+    "order": 17,
+    "token": "0x8107",
+    "lean_pattern": "riemannZeta_residue_one",
+    "lean_emit": "  have h_res := riemannZeta_residue_one\n",
+    "ko_desc": "[유수 정리 적용] 점 s = 1 에서 제타 함수가 유수(Residue)가 1인 단순극을 가짐을 이용해 발산 속도를 통제합니다."
+  },
+  {
+    "order": 18,
+    "token": "0x8108",
+    "lean_pattern": "completedRiemannZeta",
+    "lean_emit": "  let ξ := completedRiemannZeta s\n",
+    "ko_desc": "[완비 제타 함수 ξ(s)] 감마 인자와 π 거듭제곱을 결합하여 ξ(s) = ξ(1 - s)의 완전한 대칭 형태를 구성합니다."
+  },
+  {
+    "order": 19,
+    "token": "0x8109",
+    "lean_pattern": "Complex.Gamma_ne_zero",
+    "lean_emit": "  have h_gamma := Complex.Gamma_ne_zero (by linarith)\n",
+    "ko_desc": "[감마 함수 비영성] 복소 감마 함수 Γ(s)가 복소평면 전체에서 절대 0이 되지 않는 성질을 호출합니다."
+  },
+  {
+    "order": 20,
+    "token": "0x810A",
+    "lean_pattern": "Complex.Gamma_add_one",
+    "lean_emit": "  rw [Complex.Gamma_add_one]\n",
+    "ko_desc": "[감마 함수 점화식] Γ(s + 1) = s · Γ(s) 관계를 적용하여 감마 인자의 차수를 이동시킵니다."
+  },
+  {
+    "order": 21,
+    "token": "0x810B",
+    "lean_pattern": "DifferentiableOn ℂ",
+    "lean_emit": "  have h_holo : DifferentiableOn ℂ riemannZeta {s | s ≠ 1} := differentiableOn_riemannZeta\n",
+    "ko_desc": "[정칙성(해석성)] s = 1 을 제외한 복소평면 전역에서 제타 함수가 복소 미분 가능(해석적 연속)함을 보장합니다."
+  },
+  {
+    "order": 22,
+    "token": "0x810C",
+    "lean_pattern": "circleIntegral",
+    "lean_emit": "  rw [← Complex.two_pi_I_inv_smul_circleIntegral_sub_inv_smul]\n",
+    "ko_desc": "[코시 적분 공식] 폐곡선 위의 선적분을 통해 내부 점의 함숫값과 도함수를 복원합니다."
+  },
+  {
+    "order": 23,
+    "token": "0x810D",
+    "lean_pattern": "AnalyticOn.eqOn_of_preconnected_of_frequently_eq",
+    "lean_emit": "  apply AnalyticOn.eqOn_of_preconnected_of_frequently_eq\n",
+    "ko_desc": "[항등 정리(해석적 연속의 유일성)] 연결된 영역 내 수렴 점열에서 두 해석함수가 일치하면 영역 전체에서 동일함을 확정합니다."
+  },
+  {
+    "order": 24,
+    "token": "0x810E",
+    "lean_pattern": "mellin",
+    "lean_emit": "  have h_mellin := mellin_riemannZeta\n",
+    "ko_desc": "[멜린 변환] 야코비 세타 함수의 모듈러 대칭성을 적분 변환해 제타 함수의 함수 방정식을 도출합니다."
+  },
+  {
+    "order": 25,
+    "token": "0x810F",
+    "lean_pattern": "vonMangoldt",
+    "lean_emit": "  have h_mangoldt := LSeries_vonMangoldt_eq_deriv_riemannZeta_div\n",
+    "ko_desc": "[폰 망골트 함수 Λ(n)] 제타 함수의 로그 미분(-ζ'(s)/ζ(s))을 소수 거듭제곱의 가중합으로 연결합니다."
+  },
+  {
+    "order": 26,
+    "token": "0x8110",
+    "lean_pattern": "chebyshevPsi",
+    "lean_emit": "  have h_psi := chebyshevPsi_asymptotic\n",
+    "ko_desc": "[체비쇼프 함수 ψ(x)] 제타 영점의 실수부 상한선으로부터 소수 계량 함수의 점근적 크기를 평가합니다."
+  },
+  {
+    "order": 27,
+    "token": "0xC001",
+    "lean_pattern": "by_cases",
+    "lean_emit": "  by_cases h_case : s.re = 1 / 2\n",
+    "ko_desc": "[논리 분기] 명제의 성립 여부에 따라 임계선 위(Re(s) = 1/2)와 그 외 영역으로 경우를 나눕니다."
+  },
+  {
+    "order": 28,
+    "token": "0xFF01",
+    "lean_pattern": "by_contra",
+    "lean_emit": "  by_contra h_contra\n",
+    "ko_desc": "[PUA-B 귀류법 개시] 결론을 부정하여 모순을 이끌어내는 귀류법 블록으로 진입합니다."
+  },
+  {
+    "order": 29,
+    "token": "0xFF02",
+    "lean_pattern": "zeta_factor_ne_zero",
+    "lean_emit": "  exact mul_eq_zero.mp h_fe |>.resolve_left (zeta_factor_ne_zero s h_strip)\n",
+    "ko_desc": "[PUA-B 대칭 영점 확정] 비영 인자를 소거하여 반대편 대칭점 `1 - s` 역시 반드시 영점(ζ(1 - s) = 0)임을 증명합니다."
+  },
+  {
+    "order": 30,
+    "token": "0xFF03",
+    "lean_pattern": "RiemannHypothesis",
+    "lean_emit": "  exact fun s h_zero h_nontriv h_ne_one => h_crit_line\n",
+    "ko_desc": "[PUA-B 리만 가설 귀결] 임계띠 내 모든 비자명 영점의 실수부가 1/2에 수렴함을 최종 선언합니다."
+  },
+  {
+    "order": 31,
+    "token": "0x8300",
+    "lean_pattern": "Matrix",
+    "lean_emit": "  apply Matrix -- auto-learned (freq: 330980)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Matrix` (문헌 출현 330980회)를 적용합니다."
+  },
+  {
+    "order": 32,
+    "token": "0x8301",
+    "lean_pattern": "algebraMap",
+    "lean_emit": "  apply algebraMap -- auto-learned (freq: 242730)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `algebraMap` (문헌 출현 242730회)를 적용합니다."
+  },
+  {
+    "order": 33,
+    "token": "0x8302",
+    "lean_pattern": "Field",
+    "lean_emit": "  apply Field -- auto-learned (freq: 211343)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Field` (문헌 출현 211343회)를 적용합니다."
+  },
+  {
+    "order": 34,
+    "token": "0x8303",
+    "lean_pattern": "NumberField",
+    "lean_emit": "  apply NumberField -- auto-learned (freq: 202193)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `NumberField` (문헌 출현 202193회)를 적용합니다."
+  },
+  {
+    "order": 35,
+    "token": "0x8304",
+    "lean_pattern": "using",
+    "lean_emit": "  apply using -- auto-learned (freq: 193481)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `using` (문헌 출현 193481회)를 적용합니다."
+  },
+  {
+    "order": 36,
+    "token": "0x8305",
+    "lean_pattern": "Mathlib",
+    "lean_emit": "  apply Mathlib -- auto-learned (freq: 155753)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Mathlib` (문헌 출현 155753회)를 적용합니다."
+  },
+  {
+    "order": 37,
+    "token": "0x8306",
+    "lean_pattern": "CommRing",
+    "lean_emit": "  apply CommRing -- auto-learned (freq: 148640)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `CommRing` (문헌 출현 148640회)를 적용합니다."
+  },
+  {
+    "order": 38,
+    "token": "0x8307",
+    "lean_pattern": "D.host.E",
+    "lean_emit": "  apply D.host.E -- auto-learned (freq: 140805)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `D.host.E` (문헌 출현 140805회)를 적용합니다."
+  },
+  {
+    "order": 39,
+    "token": "0x8308",
+    "lean_pattern": "Algebra",
+    "lean_emit": "  apply Algebra -- auto-learned (freq: 123252)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Algebra` (문헌 출현 123252회)를 적용합니다."
+  },
+  {
+    "order": 40,
+    "token": "0x8309",
+    "lean_pattern": "congrArg",
+    "lean_emit": "  apply congrArg -- auto-learned (freq: 119844)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `congrArg` (문헌 출현 119844회)를 적용합니다."
+  },
+  {
+    "order": 41,
+    "token": "0x830A",
+    "lean_pattern": "simpa",
+    "lean_emit": "  apply simpa -- auto-learned (freq: 114281)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `simpa` (문헌 출현 114281회)를 적용합니다."
+  },
+  {
+    "order": 42,
+    "token": "0x830B",
+    "lean_pattern": "map_mul",
+    "lean_emit": "  apply map_mul -- auto-learned (freq: 113969)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `map_mul` (문헌 출현 113969회)를 적용합니다."
+  },
+  {
+    "order": 43,
+    "token": "0x830C",
+    "lean_pattern": "unfold",
+    "lean_emit": "  apply unfold -- auto-learned (freq: 111966)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `unfold` (문헌 출현 111966회)를 적용합니다."
+  },
+  {
+    "order": 44,
+    "token": "0x830D",
+    "lean_pattern": "funext",
+    "lean_emit": "  apply funext -- auto-learned (freq: 104524)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `funext` (문헌 출현 104524회)를 적용합니다."
+  },
+  {
+    "order": 45,
+    "token": "0x830E",
+    "lean_pattern": "trans",
+    "lean_emit": "  apply trans -- auto-learned (freq: 101076)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `trans` (문헌 출현 101076회)를 적용합니다."
+  },
+  {
+    "order": 46,
+    "token": "0x830F",
+    "lean_pattern": "scoped",
+    "lean_emit": "  apply scoped -- auto-learned (freq: 95649)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `scoped` (문헌 출현 95649회)를 적용합니다."
+  },
+  {
+    "order": 47,
+    "token": "0x8310",
+    "lean_pattern": "rintro",
+    "lean_emit": "  apply rintro -- auto-learned (freq: 91569)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `rintro` (문헌 출현 91569회)를 적용합니다."
+  },
+  {
+    "order": 48,
+    "token": "0x8311",
+    "lean_pattern": "set_option",
+    "lean_emit": "  apply set_option -- auto-learned (freq: 88139)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `set_option` (문헌 출현 88139회)를 적용합니다."
+  },
+  {
+    "order": 49,
+    "token": "0x8312",
+    "lean_pattern": "noncomputable",
+    "lean_emit": "  apply noncomputable -- auto-learned (freq: 86666)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `noncomputable` (문헌 출현 86666회)를 적용합니다."
+  },
+  {
+    "order": 50,
+    "token": "0x8313",
+    "lean_pattern": "haveI",
+    "lean_emit": "  apply haveI -- auto-learned (freq: 85263)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `haveI` (문헌 출현 85263회)를 적용합니다."
+  },
+  {
+    "order": 51,
+    "token": "0x8314",
+    "lean_pattern": "D.what",
+    "lean_emit": "  apply D.what -- auto-learned (freq: 82891)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `D.what` (문헌 출현 82891회)를 적용합니다."
+  },
+  {
+    "order": 52,
+    "token": "0x8315",
+    "lean_pattern": "spMap",
+    "lean_emit": "  apply spMap -- auto-learned (freq: 82567)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `spMap` (문헌 출현 82567회)를 적용합니다."
+  },
+  {
+    "order": 53,
+    "token": "0x8316",
+    "lean_pattern": "Fintype",
+    "lean_emit": "  apply Fintype -- auto-learned (freq: 81690)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Fintype` (문헌 출현 81690회)를 적용합니다."
+  },
+  {
+    "order": 54,
+    "token": "0x8317",
+    "lean_pattern": "Submodule",
+    "lean_emit": "  apply Submodule -- auto-learned (freq: 78857)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Submodule` (문헌 출현 78857회)를 적용합니다."
+  },
+  {
+    "order": 55,
+    "token": "0x8318",
+    "lean_pattern": "MvPolynomial",
+    "lean_emit": "  apply MvPolynomial -- auto-learned (freq: 71258)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `MvPolynomial` (문헌 출현 71258회)를 적용합니다."
+  },
+  {
+    "order": 56,
+    "token": "0x8319",
+    "lean_pattern": "Scheme",
+    "lean_emit": "  apply Scheme -- auto-learned (freq: 71003)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Scheme` (문헌 출현 71003회)를 적용합니다."
+  },
+  {
+    "order": 57,
+    "token": "0x831A",
+    "lean_pattern": "D.host.F",
+    "lean_emit": "  apply D.host.F -- auto-learned (freq: 68553)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `D.host.F` (문헌 출현 68553회)를 적용합니다."
+  },
+  {
+    "order": 58,
+    "token": "0x831B",
+    "lean_pattern": "Module",
+    "lean_emit": "  apply Module -- auto-learned (freq: 67147)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Module` (문헌 출현 67147회)를 적용합니다."
+  },
+  {
+    "order": 59,
+    "token": "0x831C",
+    "lean_pattern": "Finset",
+    "lean_emit": "  apply Finset -- auto-learned (freq: 66719)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Finset` (문헌 출현 66719회)를 적용합니다."
+  },
+  {
+    "order": 60,
+    "token": "0x831D",
+    "lean_pattern": "private",
+    "lean_emit": "  apply private -- auto-learned (freq: 65786)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `private` (문헌 출현 65786회)를 적용합니다."
+  },
+  {
+    "order": 61,
+    "token": "0x831E",
+    "lean_pattern": "Category.assoc",
+    "lean_emit": "  apply Category.assoc -- auto-learned (freq: 65328)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Category.assoc` (문헌 출현 65328회)를 적용합니다."
+  },
+  {
+    "order": 62,
+    "token": "0x831F",
+    "lean_pattern": "first",
+    "lean_emit": "  apply first -- auto-learned (freq: 62229)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `first` (문헌 출현 62229회)를 적용합니다."
+  },
+  {
+    "order": 63,
+    "token": "0x8320",
+    "lean_pattern": "Finset.sum_congr",
+    "lean_emit": "  apply Finset.sum_congr -- auto-learned (freq: 61132)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Finset.sum_congr` (문헌 출현 61132회)를 적용합니다."
+  },
+  {
+    "order": 64,
+    "token": "0x8321",
+    "lean_pattern": "instance",
+    "lean_emit": "  apply instance -- auto-learned (freq: 60128)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `instance` (문헌 출현 60128회)를 적용합니다."
+  },
+  {
+    "order": 65,
+    "token": "0x8322",
+    "lean_pattern": "IsDedekindDomain",
+    "lean_emit": "  apply IsDedekindDomain -- auto-learned (freq: 59714)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `IsDedekindDomain` (문헌 출현 59714회)를 적용합니다."
+  },
+  {
+    "order": 66,
+    "token": "0x8323",
+    "lean_pattern": "AddCommGroup",
+    "lean_emit": "  apply AddCommGroup -- auto-learned (freq: 58465)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `AddCommGroup` (문헌 출현 58465회)를 적용합니다."
+  },
+  {
+    "order": 67,
+    "token": "0x8324",
+    "lean_pattern": "maxHeartbeats",
+    "lean_emit": "  apply maxHeartbeats -- auto-learned (freq: 57556)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `maxHeartbeats` (문헌 출현 57556회)를 적용합니다."
+  },
+  {
+    "order": 68,
+    "token": "0x8325",
+    "lean_pattern": "map_zero",
+    "lean_emit": "  apply map_zero -- auto-learned (freq: 54970)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `map_zero` (문헌 출현 54970회)를 적용합니다."
+  },
+  {
+    "order": 69,
+    "token": "0x8326",
+    "lean_pattern": "HeightOneSpectrum",
+    "lean_emit": "  apply HeightOneSpectrum -- auto-learned (freq: 54417)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `HeightOneSpectrum` (문헌 출현 54417회)를 적용합니다."
+  },
+  {
+    "order": 70,
+    "token": "0x8327",
+    "lean_pattern": "map_add",
+    "lean_emit": "  apply map_add -- auto-learned (freq: 54161)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `map_add` (문헌 출현 54161회)를 적용합니다."
+  },
+  {
+    "order": 71,
+    "token": "0x8328",
+    "lean_pattern": "local",
+    "lean_emit": "  apply local -- auto-learned (freq: 52974)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `local` (문헌 출현 52974회)를 적용합니다."
+  },
+  {
+    "order": 72,
+    "token": "0x8329",
+    "lean_pattern": "Real.log",
+    "lean_emit": "  apply Real.log -- auto-learned (freq: 52720)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Real.log` (문헌 출현 52720회)를 적용합니다."
+  },
+  {
+    "order": 73,
+    "token": "0x832A",
+    "lean_pattern": "change",
+    "lean_emit": "  apply change -- auto-learned (freq: 52333)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `change` (문헌 출현 52333회)를 적용합니다."
+  },
+  {
+    "order": 74,
+    "token": "0x832B",
+    "lean_pattern": "attribute",
+    "lean_emit": "  apply attribute -- auto-learned (freq: 52024)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `attribute` (문헌 출현 52024회)를 적용합니다."
+  },
+  {
+    "order": 75,
+    "token": "0x832C",
+    "lean_pattern": "Formalism.BasicNotions",
+    "lean_emit": "  apply Formalism.BasicNotions -- auto-learned (freq: 51971)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Formalism.BasicNotions` (문헌 출현 51971회)를 적용합니다."
+  },
+  {
+    "order": 76,
+    "token": "0x832D",
+    "lean_pattern": "assumption",
+    "lean_emit": "  apply assumption -- auto-learned (freq: 51667)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `assumption` (문헌 출현 51667회)를 적용합니다."
+  },
+  {
+    "order": 77,
+    "token": "0x832E",
+    "lean_pattern": "Continuous",
+    "lean_emit": "  apply Continuous -- auto-learned (freq: 51422)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Continuous` (문헌 출현 51422회)를 적용합니다."
+  },
+  {
+    "order": 78,
+    "token": "0x832F",
+    "lean_pattern": "induction",
+    "lean_emit": "  apply induction -- auto-learned (freq: 51289)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `induction` (문헌 출현 51289회)를 적용합니다."
+  },
+  {
+    "order": 79,
+    "token": "0x8330",
+    "lean_pattern": "subst",
+    "lean_emit": "  apply subst -- auto-learned (freq: 51005)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `subst` (문헌 출현 51005회)를 적용합니다."
+  },
+  {
+    "order": 80,
+    "token": "0x8331",
+    "lean_pattern": "mul_assoc",
+    "lean_emit": "  apply mul_assoc -- auto-learned (freq: 50714)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `mul_assoc` (문헌 출현 50714회)를 적용합니다."
+  },
+  {
+    "order": 81,
+    "token": "0x8332",
+    "lean_pattern": "Set.range",
+    "lean_emit": "  apply Set.range -- auto-learned (freq: 49526)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Set.range` (문헌 출현 49526회)를 적용합니다."
+  },
+  {
+    "order": 82,
+    "token": "0x8333",
+    "lean_pattern": "TensorProduct",
+    "lean_emit": "  apply TensorProduct -- auto-learned (freq: 49466)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `TensorProduct` (문헌 출현 49466회)를 적용합니다."
+  },
+  {
+    "order": 83,
+    "token": "0x8334",
+    "lean_pattern": "MeasureTheory",
+    "lean_emit": "  apply MeasureTheory -- auto-learned (freq: 48906)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `MeasureTheory` (문헌 출현 48906회)를 적용합니다."
+  },
+  {
+    "order": 84,
+    "token": "0x8335",
+    "lean_pattern": "exact_mod_cast",
+    "lean_emit": "  apply exact_mod_cast -- auto-learned (freq: 48151)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `exact_mod_cast` (문헌 출현 48151회)를 적용합니다."
+  },
+  {
+    "order": 85,
+    "token": "0x8336",
+    "lean_pattern": "map_one",
+    "lean_emit": "  apply map_one -- auto-learned (freq: 47561)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `map_one` (문헌 출현 47561회)를 적용합니다."
+  },
+  {
+    "order": 86,
+    "token": "0x8337",
+    "lean_pattern": "D.R.m",
+    "lean_emit": "  apply D.R.m -- auto-learned (freq: 46215)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `D.R.m` (문헌 출현 46215회)를 적용합니다."
+  },
+  {
+    "order": 87,
+    "token": "0x8338",
+    "lean_pattern": "positivity",
+    "lean_emit": "  apply positivity -- auto-learned (freq: 45465)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `positivity` (문헌 출현 45465회)를 적용합니다."
+  },
+  {
+    "order": 88,
+    "token": "0x8339",
+    "lean_pattern": "FractionRing",
+    "lean_emit": "  apply FractionRing -- auto-learned (freq: 45389)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `FractionRing` (문헌 출현 45389회)를 적용합니다."
+  },
+  {
+    "order": 89,
+    "token": "0x833A",
+    "lean_pattern": "Matrix.of",
+    "lean_emit": "  apply Matrix.of -- auto-learned (freq: 43980)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Matrix.of` (문헌 출현 43980회)를 적용합니다."
+  },
+  {
+    "order": 90,
+    "token": "0x833B",
+    "lean_pattern": "CategoryTheory",
+    "lean_emit": "  apply CategoryTheory -- auto-learned (freq: 43894)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `CategoryTheory` (문헌 출현 43894회)를 적용합니다."
+  },
+  {
+    "order": 91,
+    "token": "0x833C",
+    "lean_pattern": "TopologicalSpace",
+    "lean_emit": "  apply TopologicalSpace -- auto-learned (freq: 43804)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `TopologicalSpace` (문헌 출현 43804회)를 적용합니다."
+  },
+  {
+    "order": 92,
+    "token": "0x833D",
+    "lean_pattern": "Ideal",
+    "lean_emit": "  apply Ideal -- auto-learned (freq: 43385)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Ideal` (문헌 출현 43385회)를 적용합니다."
+  },
+  {
+    "order": 93,
+    "token": "0x833E",
+    "lean_pattern": "Submodule.span",
+    "lean_emit": "  apply Submodule.span -- auto-learned (freq: 42381)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Submodule.span` (문헌 출현 42381회)를 적용합니다."
+  },
+  {
+    "order": 94,
+    "token": "0x833F",
+    "lean_pattern": "IsUnit",
+    "lean_emit": "  apply IsUnit -- auto-learned (freq: 42204)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `IsUnit` (문헌 출현 42204회)를 적용합니다."
+  },
+  {
+    "order": 95,
+    "token": "0x8340",
+    "lean_pattern": "smul_eq_mul",
+    "lean_emit": "  apply smul_eq_mul -- auto-learned (freq: 42107)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `smul_eq_mul` (문헌 출현 42107회)를 적용합니다."
+  },
+  {
+    "order": 96,
+    "token": "0x8341",
+    "lean_pattern": "AlgebraicGeometry",
+    "lean_emit": "  apply AlgebraicGeometry -- auto-learned (freq: 41717)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `AlgebraicGeometry` (문헌 출현 41717회)를 적용합니다."
+  },
+  {
+    "order": 97,
+    "token": "0x8342",
+    "lean_pattern": "Subtype.ext",
+    "lean_emit": "  apply Subtype.ext -- auto-learned (freq: 41703)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Subtype.ext` (문헌 출현 41703회)를 적용합니다."
+  },
+  {
+    "order": 98,
+    "token": "0x8343",
+    "lean_pattern": "one_mul",
+    "lean_emit": "  apply one_mul -- auto-learned (freq: 40365)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `one_mul` (문헌 출현 40365회)를 적용합니다."
+  },
+  {
+    "order": 99,
+    "token": "0x8344",
+    "lean_pattern": "mul_one",
+    "lean_emit": "  apply mul_one -- auto-learned (freq: 40005)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `mul_one` (문헌 출현 40005회)를 적용합니다."
+  },
+  {
+    "order": 100,
+    "token": "0x8345",
+    "lean_pattern": "choose",
+    "lean_emit": "  apply choose -- auto-learned (freq: 39558)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `choose` (문헌 출현 39558회)를 적용합니다."
+  },
+  {
+    "order": 101,
+    "token": "0x8346",
+    "lean_pattern": "classical",
+    "lean_emit": "  apply classical -- auto-learned (freq: 38372)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `classical` (문헌 출현 38372회)를 적용합니다."
+  },
+  {
+    "order": 102,
+    "token": "0x8347",
+    "lean_pattern": "Matrix.mul_assoc",
+    "lean_emit": "  apply Matrix.mul_assoc -- auto-learned (freq: 38167)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Matrix.mul_assoc` (문헌 출현 38167회)를 적용합니다."
+  },
+  {
+    "order": 103,
+    "token": "0x8348",
+    "lean_pattern": "ReciprocityTheory.ChartRestriction.G.Geo.Tor",
+    "lean_emit": "  apply ReciprocityTheory.ChartRestriction.G.Geo.Tor -- auto-learned (freq: 38159)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `ReciprocityTheory.ChartRestriction.G.Geo.Tor` (문헌 출현 38159회)를 적용합니다."
+  },
+  {
+    "order": 104,
+    "token": "0x8349",
+    "lean_pattern": "Subgroup",
+    "lean_emit": "  apply Subgroup -- auto-learned (freq: 37447)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Subgroup` (문헌 출현 37447회)를 적용합니다."
+  },
+  {
+    "order": 105,
+    "token": "0x834A",
+    "lean_pattern": "map_smul",
+    "lean_emit": "  apply map_smul -- auto-learned (freq: 37368)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `map_smul` (문헌 출현 37368회)를 적용합니다."
+  },
+  {
+    "order": 106,
+    "token": "0x834B",
+    "lean_pattern": "push_cast",
+    "lean_emit": "  apply push_cast -- auto-learned (freq: 36692)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `push_cast` (문헌 출현 36692회)를 적용합니다."
+  },
+  {
+    "order": 107,
+    "token": "0x834C",
+    "lean_pattern": "congrFun",
+    "lean_emit": "  apply congrFun -- auto-learned (freq: 36482)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `congrFun` (문헌 출현 36482회)를 적용합니다."
+  },
+  {
+    "order": 108,
+    "token": "0x834D",
+    "lean_pattern": "Ideal.span",
+    "lean_emit": "  apply Ideal.span -- auto-learned (freq: 36254)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Ideal.span` (문헌 출현 36254회)를 적용합니다."
+  },
+  {
+    "order": 109,
+    "token": "0x834E",
+    "lean_pattern": "Measure",
+    "lean_emit": "  apply Measure -- auto-learned (freq: 35741)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Measure` (문헌 출현 35741회)를 적용합니다."
+  },
+  {
+    "order": 110,
+    "token": "0x834F",
+    "lean_pattern": "inferInstance",
+    "lean_emit": "  apply inferInstance -- auto-learned (freq: 34592)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `inferInstance` (문헌 출현 34592회)를 적용합니다."
+  },
+  {
+    "order": 111,
+    "token": "0x8350",
+    "lean_pattern": "mul_comm",
+    "lean_emit": "  apply mul_comm -- auto-learned (freq: 34006)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `mul_comm` (문헌 출현 34006회)를 적용합니다."
+  },
+  {
+    "order": 112,
+    "token": "0x8351",
+    "lean_pattern": "split_ifs",
+    "lean_emit": "  apply split_ifs -- auto-learned (freq: 33492)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `split_ifs` (문헌 출현 33492회)를 적용합니다."
+  },
+  {
+    "order": 113,
+    "token": "0x8352",
+    "lean_pattern": "Module.finrank",
+    "lean_emit": "  apply Module.finrank -- auto-learned (freq: 33464)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Module.finrank` (문헌 출현 33464회)를 적용합니다."
+  },
+  {
+    "order": 114,
+    "token": "0x8353",
+    "lean_pattern": "Function.Injective",
+    "lean_emit": "  apply Function.Injective -- auto-learned (freq: 32079)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Function.Injective` (문헌 출현 32079회)를 적용합니다."
+  },
+  {
+    "order": 115,
+    "token": "0x8354",
+    "lean_pattern": "ReciprocityTheory.ChartRestriction.G.Semi",
+    "lean_emit": "  apply ReciprocityTheory.ChartRestriction.G.Semi -- auto-learned (freq: 31973)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `ReciprocityTheory.ChartRestriction.G.Semi` (문헌 출현 31973회)를 적용합니다."
+  },
+  {
+    "order": 116,
+    "token": "0x8355",
+    "lean_pattern": "if_neg",
+    "lean_emit": "  apply if_neg -- auto-learned (freq: 31862)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `if_neg` (문헌 출현 31862회)를 적용합니다."
+  },
+  {
+    "order": 117,
+    "token": "0x8356",
+    "lean_pattern": "ReciprocityTheory.ChartRestriction.G",
+    "lean_emit": "  apply ReciprocityTheory.ChartRestriction.G -- auto-learned (freq: 31632)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `ReciprocityTheory.ChartRestriction.G` (문헌 출현 31632회)를 적용합니다."
+  },
+  {
+    "order": 118,
+    "token": "0x8357",
+    "lean_pattern": "map_sum",
+    "lean_emit": "  apply map_sum -- auto-learned (freq: 31399)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `map_sum` (문헌 출현 31399회)를 적용합니다."
+  },
+  {
+    "order": 119,
+    "token": "0x8358",
+    "lean_pattern": "Pi.single",
+    "lean_emit": "  apply Pi.single -- auto-learned (freq: 31365)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Pi.single` (문헌 출현 31365회)를 적용합니다."
+  },
+  {
+    "order": 120,
+    "token": "0x8359",
+    "lean_pattern": "map_sub",
+    "lean_emit": "  apply map_sub -- auto-learned (freq: 31324)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `map_sub` (문헌 출현 31324회)를 적용합니다."
+  },
+  {
+    "order": 121,
+    "token": "0x835A",
+    "lean_pattern": "DecidableEq",
+    "lean_emit": "  apply DecidableEq -- auto-learned (freq: 30144)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `DecidableEq` (문헌 출현 30144회)를 적용합니다."
+  },
+  {
+    "order": 122,
+    "token": "0x835B",
+    "lean_pattern": "Real.exp",
+    "lean_emit": "  apply Real.exp -- auto-learned (freq: 29304)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Real.exp` (문헌 출현 29304회)를 적용합니다."
+  },
+  {
+    "order": 123,
+    "token": "0x835C",
+    "lean_pattern": "Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes",
+    "lean_emit": "  apply Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes -- auto-learned (freq: 29193)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes` (문헌 출현 29193회)를 적용합니다."
+  },
+  {
+    "order": 124,
+    "token": "0x835D",
+    "lean_pattern": "Group",
+    "lean_emit": "  apply Group -- auto-learned (freq: 29171)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Group` (문헌 출현 29171회)를 적용합니다."
+  },
+  {
+    "order": 125,
+    "token": "0x835E",
+    "lean_pattern": "GlobalTheory",
+    "lean_emit": "  apply GlobalTheory -- auto-learned (freq: 28561)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `GlobalTheory` (문헌 출현 28561회)를 적용합니다."
+  },
+  {
+    "order": 126,
+    "token": "0x835F",
+    "lean_pattern": "Classical",
+    "lean_emit": "  apply Classical -- auto-learned (freq: 28499)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Classical` (문헌 출현 28499회)를 적용합니다."
+  },
+  {
+    "order": 127,
+    "token": "0x8360",
+    "lean_pattern": "CommRingCat.of",
+    "lean_emit": "  apply CommRingCat.of -- auto-learned (freq: 28354)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `CommRingCat.of` (문헌 출현 28354회)를 적용합니다."
+  },
+  {
+    "order": 128,
+    "token": "0x8361",
+    "lean_pattern": "map_pow",
+    "lean_emit": "  apply map_pow -- auto-learned (freq: 28251)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `map_pow` (문헌 출현 28251회)를 적용합니다."
+  },
+  {
+    "order": 129,
+    "token": "0x8362",
+    "lean_pattern": "FiniteDimensional",
+    "lean_emit": "  apply FiniteDimensional -- auto-learned (freq: 27986)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `FiniteDimensional` (문헌 출현 27986회)를 적용합니다."
+  },
+  {
+    "order": 130,
+    "token": "0x8363",
+    "lean_pattern": "Module.End",
+    "lean_emit": "  apply Module.End -- auto-learned (freq: 27917)\n",
+    "ko_desc": "[자동 학습 정리] Mathlib 식별자 `Module.End` (문헌 출현 27917회)를 적용합니다."
+  }
+]
