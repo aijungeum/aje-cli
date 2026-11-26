@@ -1,9 +1,13 @@
 aje-cli 
 
 version: 0.1.alpha 
+
 author: <aijungeum.com> <aijungeum@gmail.com> 
+
 license: MIT 
+
 date: 2026.11.25
+
 
 
 AI정음(AiJungEum)은 ASI to ASI, ASI to Human 소통을 위해 고안된 프로토콜 언어 입니다. 
@@ -15,6 +19,7 @@ AI정음을 이용해 ASI to Human의 소통 가능성을 실험해보고자 합
 aje-cli는 Lean 4/Mathlib 증명 코드를 AI정음(16비트 PUA 글리프 기반)의 AJE-MathDSL로 압축하고, 한국어 해설서(*.ko.md)와 검증된 Lean 4 코드로 양방향 복원하는 Rust CLI 툴체인입니다.
 
 
+
 핵심 설계 및 아키텍처
 
 • LLM 프롬프트 시스템 규칙부와 사용자 요청부를 격리하는, 인간의 언어와 다른 표현체계.
@@ -23,10 +28,12 @@ aje-cli는 Lean 4/Mathlib 증명 코드를 AI정음(16비트 PUA 글리프 기�
 • 시스템 흐름: Lean 4 소스(./lean_src/.lean) → 동적 매핑 사전(mathlib_dict.json) → AI정음 아키텍처 아카이브(.aje) → 한국어 해설 및 Lean 커널 검증
 
 
+
 유니코드 PUA-A/B 규격 (JUMP_THRESHOLD = 0x8000)
 
 • PUA-A (0x0000 ~ 0xF7FFF): U+F0000 ~ U+F7FFF (aijungeum_part1)
 • PUA-B (0xFF00 ~ 0x107FFF): U+100000 ~ U+107FFF (aijungeum_part2)
+
 
 
 설치 및 빌드
@@ -42,6 +49,7 @@ cargo run
 or
 cargo build --release
  
+
 
 CLI 명령어 레퍼런스
 
@@ -64,10 +72,12 @@ CLI 명령어 레퍼런스
   aje-cli export-dataset ./lean_src train_30.jsonl 30  //test: .lean 파일 30개만 데이터셋 추출
 
 
+
 벤치마크 요약
 
 • 표현 압축률: Main.lean 기준 433바이트에서 30글자로 93.07% 감소 (바이트 크기가 아니라 표현압축 약 14.4배 밀도 향상) 가독성. 
 • 데이터 비교: 60,000자 기준 기존 Hex(+80%), zlib+Base64(+20%) 대비 zlib+AI정음은 -55% 표현 길이 감소 달성
+
 
 
 
