@@ -1,0 +1,10 @@
+[package]
+name = "aje-cli"
+version = "0.1.0"
+edition = "2024"
+authors = ["<aijungeum.com><aijungeum@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/aijungeum/aje-cli"
+description = "리만가설 증명 Lean코드를 ASI의 표현으로 규정하고, AI정음을 이용해 ASI to Human의 소통 가능성을 실험해보고자 합니다."
+
+[dependencies]

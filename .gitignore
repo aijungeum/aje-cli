@@ -1,0 +1,11 @@
+/target
+/lean_src
+/aje-math-llm-lora-mac
+
+.DS_Store
+.env
+*.aje
+*.lean
+*.bin
+*.json
+*.jsonl
